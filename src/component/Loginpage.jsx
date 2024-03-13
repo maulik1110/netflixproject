@@ -5,6 +5,7 @@ import { checkValidData } from "../utils/validate";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
 
 const Loginpage = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -14,6 +15,7 @@ const Loginpage = () => {
   const toggleSignInForm = () => {
     setIsSignIn(!isSignIn);
   };
+  const navigate = useNavigate();
 
   const handleButtonClick = () => {
     //validate from data
@@ -37,12 +39,15 @@ const Loginpage = () => {
           // Signed up
           const user = userCredential.user;
           console.log(user);
+          Navigate("/browse")
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           setErrorMessage(errorCode + " " + errorMessage);
           // ..
+
+
         });
     } else {
       //signin logic
@@ -52,6 +57,7 @@ const Loginpage = () => {
           const user = userCredential.user;
           console.log(user);
           // ...
+          navigate("/browse")
         })
         .catch((error) => {
           const errorCode = error.code;
