@@ -1,38 +1,65 @@
-import React, { useState,useRef } from "react";
+import React, { useState, useRef } from "react";
 import Header from "./Header";
 // import Bannerimg from "../assets/logo_files/Bannerimg.jpg"
-import {checkValidData} from "../utils/validate"
+import { checkValidData } from "../utils/validate";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Loginpage = () => {
+  const [isSignIn, setIsSignIn] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const email = useRef(null);
+  const password = useRef(null);
+  const toggleSignInForm = () => {
+    setIsSignIn(!isSignIn);
+  };
 
-  const [isSignIn, setIsSignIn] = useState(true)
-  const [errorMessage, setErrorMessage] = useState(null)
-  const email = useRef(null)
-  const password = useRef(null)
-  const toggleSignInForm=()=>{
-    setIsSignIn(!isSignIn)
-  }
-
-  const handleButtonClick = ()=>{
+  const handleButtonClick = () => {
     //validate from data
     // console.log(email.current.value);
     // console.log(password.current.value);
-    const msg = checkValidData(email.current.value,password.current.value)
+    const msg = checkValidData(email.current.value, password.current.value);
     // console.log(msg);
-    setErrorMessage(msg)
-    if(msg) return; // mtlb agar koi msg hua then aage mat jao bcz humne set kara h ki agar galat h then email/pass not valid and agar sahi h then null 
-    
+    setErrorMessage(msg);
+    if (msg) return; // mtlb agar koi msg hua then aage mat jao bcz humne set kara h ki agar galat h then email/pass not valid and agar sahi h then null
 
     //signin-signup
-    if(!isSignIn){ //mtlb signup hai
+    if (!isSignIn) {
+      //mtlb signup hai
       //signup logic
-      
-    }
-    else{
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + " " + errorMessage);
+          // ..
+        });
+    } else {
       //signin logic
-
+      signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + " " + errorMessage)
+        });
     }
-  }
+  };
 
   return (
     <div>
@@ -44,14 +71,52 @@ const Loginpage = () => {
           alt="banner"
         />
       </div>
-      <form onSubmit={(e)=>e.preventDefault()} className="signup text-white rounded-lg px-12 py-5 relative bg-black w-4/12 flex flex-col translate-x-[-50%] translate-y-[30%] top-[50%] left-[50%] bg-opacity-80">
-        <h1 className="font-bold text-white text-3xl my-5">{isSignIn ? "Sign In ": "Sign Up"}</h1>
-        {!isSignIn && <input className="p-2 my-2 bg-gray-700 rounded w-full" type="text" placeholder="Name" name="" id="nameinput" />}
-        <input ref={email} className="p-2 my-2 bg-gray-700 rounded w-full" type="text" placeholder="Email Address" name="" id="emailinput" />
-        <input ref={password} className="p-2 my-2 bg-gray-700 rounded w-full" type="password" placeholder="Password" name="" id="passwordinput" />
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className="signup text-white rounded-lg px-12 py-5 relative bg-black w-4/12 flex flex-col translate-x-[-50%] translate-y-[30%] top-[50%] left-[50%] bg-opacity-80"
+      >
+        <h1 className="font-bold text-white text-3xl my-5">
+          {isSignIn ? "Sign In " : "Sign Up"}
+        </h1>
+        {!isSignIn && (
+          <input
+            className="p-2 my-2 bg-gray-700 rounded w-full"
+            type="text"
+            placeholder="Name"
+            name=""
+            id="nameinput"
+          />
+        )}
+        <input
+          ref={email}
+          className="p-2 my-2 bg-gray-700 rounded w-full"
+          type="text"
+          placeholder="Email Address"
+          name=""
+          id="emailinput"
+        />
+        <input
+          ref={password}
+          className="p-2 my-2 bg-gray-700 rounded w-full"
+          type="password"
+          placeholder="Password"
+          name=""
+          id="passwordinput"
+        />
         <p className="text-center text-red-500 font-normal">{errorMessage}</p>
-        <button onClick={handleButtonClick} className="p-2 my-5 rounded w-full bg-red-500" type="submit">{isSignIn ? "Sign In ": "Sign Up"}</button>
-        <p className="py-4 cursor-pointer font-medium" onClick={toggleSignInForm}>{isSignIn ? "New to Netflix? Sign Up Now" : "Already a user?"}</p>
+        <button
+          onClick={handleButtonClick}
+          className="p-2 my-5 rounded w-full bg-red-500"
+          type="submit"
+        >
+          {isSignIn ? "Sign In " : "Sign Up"}
+        </button>
+        <p
+          className="py-4 cursor-pointer font-medium"
+          onClick={toggleSignInForm}
+        >
+          {isSignIn ? "New to Netflix? Sign Up Now" : "Already a user?"}
+        </p>
       </form>
     </div>
   );

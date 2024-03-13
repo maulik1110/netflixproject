@@ -23,7 +23,12 @@ Currently, two official plugins are available:
 - useref for referencing input of form and then destructure to email.current.value check in console
 - then use validate.js function and validate
 - error msg set state that it display message. update msg from above task by setError = msg(validate logic)
-
+- importing auth and its import statement in firebase file so that we can use anywhere
+- copy paste the firebase signup code and also dont forget to import autb from utils
+- replace the email and password by actual vlaue that is email.current.value// we have seen it be console log as getting it by use ref
+- done sign in sign up from firebase documentation
+- setup redux store
+- 
 
 # feature
 - login/signup
