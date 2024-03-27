@@ -59,7 +59,8 @@ const Header = () => {
 
   return (
     // <div className="absolute w-full px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
-      <div className={`w-full px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between ${location.pathname === '/' ? 'absolute' : ''}`}>
+      // <div className={`w-full px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between ${location.pathname === '/' ? 'absolute' : ''}`}>
+      <div className="w-full px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between absolute">
 
       <img className="w-44" src={Logo} alt="logo" />
 
@@ -67,7 +68,8 @@ const Header = () => {
         user && (
       <div className="flex cursor-pointer">
         {/* <img className="w-12 h-12 rounded-md m-1" src={user.photoURL} alt="" /> */}
-        <img onClick={handleSignOut} className="w-14 h-14" src={Signout} alt="" />
+        {/* <img onClick={handleSignOut} className="w-14 h-14 text-white" src={Signout} alt="" /> */}
+        <h2 onClick={handleSignOut} className="w-20 flex items-center font-semibold h-14 text-white">Sign Out</h2>
       </div>
         )
       }

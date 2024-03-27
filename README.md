@@ -42,7 +42,10 @@ Currently, two official plugins are available:
 - now then normal just showed title description and 2 buttton
 - next for bg video, took a new api that needs movie id and gives trailer so we already have all movies and even first movie in MAINMOVIES--STORE SE LIYE THE, so pass props and those accepts api id then if movie has two or more trailer then show 0 index trailer. bt before that we filtered the data woth only trailer bcz movie might have many things so used filter one
 - also handled case that if there is no trailer then take first result 
-- 
+- secondary component
+- made horizontal list and it shows image then did some css
+- align container 1 and 2 for better ui
+- made another api calls and made a hook copy paste
 
 # feature
 - login/signup
