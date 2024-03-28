@@ -46,6 +46,8 @@ Currently, two official plugins are available:
 - made horizontal list and it shows image then did some css
 - align container 1 and 2 for better ui
 - made another api calls and made a hook copy paste
+- GPT feature
+- 
 
 # feature
 - login/signup
