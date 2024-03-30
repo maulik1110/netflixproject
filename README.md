@@ -47,7 +47,10 @@ Currently, two official plugins are available:
 - align container 1 and 2 for better ui
 - made another api calls and made a hook copy paste
 - GPT feature
-- 
+- made first header multilingual by redux store and used select for dropdown menub and from that onchange we take e.target.value and pass that to store where we already made a slice of language where default value is english.
+- and then apply on placeholder and search by using selector and change dynamically . rememmber when using here use selectore we need to give as arraykey lang[allowlang].placeholer is an example.
+- did that when its gpt page show button as home and when home page show gptmood
+- also did that language feature only available on gpt page not in whole 
 
 # feature
 - login/signup

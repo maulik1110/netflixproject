@@ -12,6 +12,6 @@ export const BG_IMG = "https://assets.nflxext.com/ffe/siteui/vlv3/93da5c27-be66-
 
 export const SUPPORTED_LANGUAGES = [
   {identifier: 'en', name:"English"},
-  {identifier: 'spaniah', name:"Spanish"},
+  {identifier: 'spanish', name:"Spanish"},
   {identifier: 'hindi', name:"Hindi"},
 ]
